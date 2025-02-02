@@ -60,15 +60,15 @@ export const assets = {
 
 export const specialityData = [
   {
-    speciality: "General physician",
+    speciality: "Painter",
     image: Roller,
   },
   {
-    speciality: "Roller",
+    speciality: "Plumber",
     image: Plumber,
   },
   {
-    speciality: "Dermatologist",
+    speciality: "Electrician",
     image: Electric,
   },
   {
@@ -76,11 +76,11 @@ export const specialityData = [
     image: Carpenter,
   },
   {
-    speciality: "Neurologist",
+    speciality: "Air Technician ",
     image: Hvac,
   },
   {
-    speciality: "Gastroenterologist",
+    speciality: "TV Technician ",
     image: Tv,
   },
 ];
@@ -88,7 +88,7 @@ export const specialityData = [
 export const workers = [
   {
     _id: "doc1",
-    name: "Dr. Richard James",
+    name: "Richard James",
     image: doc1,
     speciality: "General physician",
     degree: "MBBS",
@@ -103,7 +103,7 @@ export const workers = [
   },
   {
     _id: "doc2",
-    name: "Dr. Emily Larson",
+    name: "Emily Larson",
     image: doc2,
     speciality: "Gynecologist",
     degree: "MBBS",
@@ -118,7 +118,7 @@ export const workers = [
   },
   {
     _id: "doc3",
-    name: "Dr. Sarah Patel",
+    name: "Sarah Patel",
     image: doc3,
     speciality: "Dermatologist",
     degree: "MBBS",
@@ -133,7 +133,7 @@ export const workers = [
   },
   {
     _id: "doc4",
-    name: "Dr. Christopher Lee",
+    name: "Christopher Lee",
     image: doc4,
     speciality: "Pediatricians",
     degree: "MBBS",
@@ -148,7 +148,7 @@ export const workers = [
   },
   {
     _id: "doc5",
-    name: "Dr. Jennifer Garcia",
+    name: "Jennifer Garcia",
     image: doc5,
     speciality: "Neurologist",
     degree: "MBBS",
@@ -163,7 +163,7 @@ export const workers = [
   },
   {
     _id: "doc6",
-    name: "Dr. Andrew Williams",
+    name: "Andrew Williams",
     image: doc6,
     speciality: "Neurologist",
     degree: "MBBS",
@@ -178,7 +178,7 @@ export const workers = [
   },
   {
     _id: "doc7",
-    name: "Dr. Christopher Davis",
+    name: "Christopher Davis",
     image: doc7,
     speciality: "General physician",
     degree: "MBBS",
@@ -193,7 +193,7 @@ export const workers = [
   },
   {
     _id: "doc8",
-    name: "Dr. Timothy White",
+    name: "Timothy White",
     image: doc8,
     speciality: "Gynecologist",
     degree: "MBBS",
@@ -208,7 +208,7 @@ export const workers = [
   },
   {
     _id: "doc9",
-    name: "Dr. Ava Mitchell",
+    name: "Ava Mitchell",
     image: doc9,
     speciality: "Dermatologist",
     degree: "MBBS",
@@ -223,7 +223,7 @@ export const workers = [
   },
   {
     _id: "doc10",
-    name: "Dr. Jeffrey King",
+    name: "Jeffrey King",
     image: doc10,
     speciality: "Pediatricians",
     degree: "MBBS",
@@ -238,7 +238,7 @@ export const workers = [
   },
   {
     _id: "doc11",
-    name: "Dr. Zoe Kelly",
+    name: "Zoe Kelly",
     image: doc11,
     speciality: "Neurologist",
     degree: "MBBS",
@@ -253,7 +253,7 @@ export const workers = [
   },
   {
     _id: "doc12",
-    name: "Dr. Patrick Harris",
+    name: "Patrick Harris",
     image: doc12,
     speciality: "Neurologist",
     degree: "MBBS",
@@ -268,7 +268,7 @@ export const workers = [
   },
   {
     _id: "doc13",
-    name: "Dr. Chloe Evans",
+    name: "Chloe Evans",
     image: doc13,
     speciality: "General physician",
     degree: "MBBS",
@@ -283,7 +283,7 @@ export const workers = [
   },
   {
     _id: "doc14",
-    name: "Dr. Ryan Martinez",
+    name: "Ryan Martinez",
     image: doc14,
     speciality: "Gynecologist",
     degree: "MBBS",
@@ -298,7 +298,7 @@ export const workers = [
   },
   {
     _id: "doc15",
-    name: "Dr. Amelia Hill",
+    name: "Amelia Hill",
     image: doc15,
     speciality: "Dermatologist",
     degree: "MBBS",
