@@ -15,21 +15,21 @@ import info_icon from "./info_icon.svg";
 import upload_icon from "./upload_icon.png";
 import stripe_logo from "./stripe_logo.png";
 import razorpay_logo from "./razorpay_logo.png";
-import doc1 from "./doc1.png";
-import doc2 from "./doc2.png";
-import doc3 from "./doc3.png";
-import doc4 from "./doc4.png";
-import doc5 from "./doc5.png";
-import doc6 from "./doc6.png";
-import doc7 from "./doc7.png";
-import doc8 from "./doc8.png";
-import doc9 from "./doc9.png";
-import doc10 from "./doc10.png";
-import doc11 from "./doc11.png";
-import doc12 from "./doc12.png";
-import doc13 from "./doc13.png";
-import doc14 from "./doc14.png";
-import doc15 from "./doc15.png";
+import worker1 from "./worker1.png";
+import worker2 from "./worker2.png";
+import worker3 from "./worker3.png";
+import doc4 from "./worker2.png";
+import doc5 from "./worker2.png";
+import doc6 from "./worker2.png";
+import doc7 from "./worker2.png";
+import doc8 from "./worker2.png";
+import doc9 from "./worker2.png";
+import doc10 from "./worker2.png";
+import doc11 from "./worker2.png";
+import doc12 from "./worker2.png";
+import doc13 from "./worker2.png";
+import doc14 from "./worker2.png";
+import doc15 from "./worker2.png";
 import Roller from "./roller-paint.png";
 import Plumber from "./wrench.png";
 import Electric from "./electrical-energy.png";
@@ -76,11 +76,11 @@ export const specialityData = [
     image: Carpenter,
   },
   {
-    speciality: "Air Technician ",
+    speciality: "Air Technician",
     image: Hvac,
   },
   {
-    speciality: "TV Technician ",
+    speciality: "TV Technician",
     image: Tv,
   },
 ];
@@ -89,8 +89,8 @@ export const workers = [
   {
     _id: "doc1",
     name: "Richard James",
-    image: doc1,
-    speciality: "General physician",
+    image: worker1,
+    speciality: "Electrician",
     degree: "MBBS",
     experience: "4 Years",
     about:
@@ -104,8 +104,8 @@ export const workers = [
   {
     _id: "doc2",
     name: "Emily Larson",
-    image: doc2,
-    speciality: "Gynecologist",
+    image: worker2,
+    speciality: "Electrician",
     degree: "MBBS",
     experience: "3 Years",
     about:
@@ -119,8 +119,8 @@ export const workers = [
   {
     _id: "doc3",
     name: "Sarah Patel",
-    image: doc3,
-    speciality: "Dermatologist",
+    image: worker3,
+    speciality: "TV Technician",
     degree: "MBBS",
     experience: "1 Years",
     about:
@@ -135,7 +135,7 @@ export const workers = [
     _id: "doc4",
     name: "Christopher Lee",
     image: doc4,
-    speciality: "Pediatricians",
+    speciality: "TV Technician",
     degree: "MBBS",
     experience: "2 Years",
     about:
@@ -150,7 +150,7 @@ export const workers = [
     _id: "doc5",
     name: "Jennifer Garcia",
     image: doc5,
-    speciality: "Neurologist",
+    speciality: "Air Technician",
     degree: "MBBS",
     experience: "4 Years",
     about:
@@ -165,7 +165,7 @@ export const workers = [
     _id: "doc6",
     name: "Andrew Williams",
     image: doc6,
-    speciality: "Neurologist",
+    speciality: "Air Technician",
     degree: "MBBS",
     experience: "4 Years",
     about:
@@ -180,7 +180,7 @@ export const workers = [
     _id: "doc7",
     name: "Christopher Davis",
     image: doc7,
-    speciality: "General physician",
+    speciality: "Carpenter",
     degree: "MBBS",
     experience: "4 Years",
     about:
@@ -195,7 +195,7 @@ export const workers = [
     _id: "doc8",
     name: "Timothy White",
     image: doc8,
-    speciality: "Gynecologist",
+    speciality: "Carpenter",
     degree: "MBBS",
     experience: "3 Years",
     about:
@@ -210,7 +210,7 @@ export const workers = [
     _id: "doc9",
     name: "Ava Mitchell",
     image: doc9,
-    speciality: "Dermatologist",
+    speciality: "Plumber",
     degree: "MBBS",
     experience: "1 Years",
     about:
@@ -225,7 +225,7 @@ export const workers = [
     _id: "doc10",
     name: "Jeffrey King",
     image: doc10,
-    speciality: "Pediatricians",
+    speciality: "Plumber",
     degree: "MBBS",
     experience: "2 Years",
     about:
@@ -240,7 +240,7 @@ export const workers = [
     _id: "doc11",
     name: "Zoe Kelly",
     image: doc11,
-    speciality: "Neurologist",
+    speciality: "Painter",
     degree: "MBBS",
     experience: "4 Years",
     about:
@@ -255,7 +255,7 @@ export const workers = [
     _id: "doc12",
     name: "Patrick Harris",
     image: doc12,
-    speciality: "Neurologist",
+    speciality: "Painter",
     degree: "MBBS",
     experience: "4 Years",
     about:
@@ -270,7 +270,7 @@ export const workers = [
     _id: "doc13",
     name: "Chloe Evans",
     image: doc13,
-    speciality: "General physician",
+    speciality: "Painter",
     degree: "MBBS",
     experience: "4 Years",
     about:
@@ -285,7 +285,7 @@ export const workers = [
     _id: "doc14",
     name: "Ryan Martinez",
     image: doc14,
-    speciality: "Gynecologist",
+    speciality: "Painter",
     degree: "MBBS",
     experience: "3 Years",
     about:
@@ -300,7 +300,7 @@ export const workers = [
     _id: "doc15",
     name: "Amelia Hill",
     image: doc15,
-    speciality: "Dermatologist",
+    speciality: "Painter",
     degree: "MBBS",
     experience: "1 Years",
     about:
