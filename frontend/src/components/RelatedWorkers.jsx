@@ -1,21 +1,28 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
-const TopWorkers = () => {
-  //navigate
-  const navigate = useNavigate();
-  //use Context
+const RelatedWorkers = ({ speciality, workerId }) => {
   const { workers } = useContext(AppContext);
+  const [relWorkers, SetrelWorkers] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (workers.length > 0 && speciality) {
+      const WorkerData = workers.filter(
+        (w) => w.speciality === speciality && w._id !== workerId
+      );
+      SetrelWorkers(WorkerData);
+    }
+  }, [workers, speciality, workerId]);
 
   return (
     <div className="flex flex-col items-center gap-4 my-16 text-gray-900 md:mx-10">
-      <h1 className="text-3xl font-medium">Top Workers to Book</h1>
+      <h1 className="text-3xl font-medium">Related Workers to Book</h1>
       <p className="sm:w-1/3 text-center text-sm">
         Simply browse through our extensive list of trusted workers.
       </p>
       <div className="w-full grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0">
-        {workers.slice(0, 10).map((item, index) => (
+        {relWorkers.slice(0, 5).map((item, index) => (
           <div
             onClick={() => {
               navigate(`/appointments/${item._id}`);
@@ -49,4 +56,4 @@ const TopWorkers = () => {
   );
 };
 
-export default TopWorkers;
+export default RelatedWorkers;
