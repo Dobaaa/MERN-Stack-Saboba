@@ -6,6 +6,7 @@ const Workers = () => {
   const { speciality } = useParams();
   const { workers } = useContext(AppContext);
   const [filterWorker, SetFilterWorker] = useState([]);
+  const [showFilter, SetShowFilter] = useState(false);
   //navigate
   const navigate = useNavigate();
 
@@ -29,7 +30,21 @@ const Workers = () => {
     <div>
       <p className="text-gray-600 ">Browse through the workers specialist.</p>
       <div className=" flex flex-col sm:flex-row items-start gap-5 mt-5">
-        <div className=" flex flex-col gap-4 text-sm text-gray-600">
+        <button
+          onClick={() => {
+            SetShowFilter((prev) => !prev);
+          }}
+          className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${
+            showFilter ? "bg-primary text-white " : ""
+          }`}
+        >
+          Filters
+        </button>
+        <div
+          className={`speciality-button flex flex-col gap-4 text-sm text-gray-600 ${
+            showFilter ? "flex " : "hidden sm:flex"
+          }`}
+        >
           <p
             onClick={() =>
               speciality === "Painter"
