@@ -2,12 +2,10 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import workerModel from "../models/workerModel.js";
-
+import jwt from "jsonwebtoken";
 // Api for Adding worker
 const addWorker = async (req, res) => {
   try {
-    console.log("Request Body:", req.body); // Log the request body
-    console.log("Request File:", req.file); // Log the uploaded file
     const {
       name,
       email,
@@ -91,4 +89,34 @@ const addWorker = async (req, res) => {
   }
 };
 
-export { addWorker };
+//APi for admin login
+const loginAdmin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      const token = jwt.sign(email + password, process.env.JWT_SECRET);
+      res.json({ success: true, token });
+    } else {
+      res.json({ success: false, message: "invalid credentials" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//api to get all workers list
+const allWorkers = async (req, res) => {
+  try {
+    const workers = await workerModel.find({}).select("-password");
+    res.json({ success: true, workers });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export { addWorker, loginAdmin, allWorkers };

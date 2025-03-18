@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import { AppContext } from "../context/AppContext";
 
 const NavBar = () => {
   //button navigate
   const navigate = useNavigate();
   //responsive navbar
   const [ShowMenu, SetShowMenu] = useState(false);
-
-  const [Token, SetToken] = useState(true);
+  const { token, SetToken, userData } = useContext(AppContext);
+  const logOut = () => {
+    SetToken(false);
+    localStorage.removeItem("token");
+  };
 
   return (
     <div className="flex items-center justify-between text-sm  py-4 mb-5 border-b border-b-gray-400">
@@ -39,11 +43,11 @@ const NavBar = () => {
         </NavLink>
       </ul>
       <div className="flex items-center gap-4">
-        {Token ? (
+        {token && userData ? (
           <div className="flex items-center gap-2 cursor-pointer  group relative">
             <LazyLoadImage
               className="w-8 rounded-full"
-              src={assets.profile_pic}
+              src={userData.image}
               alt=""
             />
             <LazyLoadImage
@@ -66,7 +70,7 @@ const NavBar = () => {
                   My Appointments
                 </p>
                 <p
-                  onClick={() => SetToken(false)}
+                  onClick={() => logOut}
                   className="hover:text-black cursor-pointer"
                 >
                   Log Out
