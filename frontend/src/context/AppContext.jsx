@@ -48,6 +48,7 @@ const AppContextProvider = (props) => {
     userData,
     SetUserData,
     loadUserProfileData,
+    getWorkersData,
   };
 
   useEffect(() => {

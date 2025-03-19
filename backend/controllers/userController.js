@@ -3,6 +3,8 @@ import bycrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
 import { v2 as cloudinary } from "cloudinary";
+import workerModel from "../models/workerModel.js";
+import appointmentModel from "../models/appointmentModel.js";
 const resgisterUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -98,4 +100,74 @@ const updateProfile = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-export { resgisterUser, LoginUser, getProfile, updateProfile };
+
+//api to book appiontment
+
+const bookAppointment = async (req, res) => {
+  try {
+    const { userId, workerId, slotDate, slotTime } = req.body;
+    const workerData = await workerModel.findById(workerId).select("-password");
+    if (!workerData.available) {
+      return res.json({ success: false, message: "worker is not available" });
+    }
+
+    let slots_booked = workerData.slots_booked;
+    if (slots_booked[slotDate]) {
+      if (slots_booked[slotDate].includes(slotTime)) {
+        return res.json({
+          success: false,
+          message: "slot is not available",
+        });
+      } else {
+        slots_booked[slotDate].push(slotTime);
+      }
+    } else {
+      slots_booked[slotDate] = [];
+      slots_booked[slotDate].push(slotTime);
+    }
+
+    const userData = await userModel.findById(userId).select("-password");
+    delete workerData.slots_booked;
+
+    const appointmentData = {
+      userId,
+      workerId,
+      userData,
+      workerData,
+      amount: workerData.fees,
+      slotTime,
+      slotDate,
+      date: Date.now(),
+    };
+
+    const newAppointment = new appointmentModel(appointmentData);
+    await newAppointment.save();
+
+    await workerModel.findByIdAndUpdate(workerId, { slots_booked });
+    res.json({ success: true, message: "Appointment Booked" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// api to get user appointments
+
+const listAppointments = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const appointments = await appointmentModel.find({ userId });
+    res.json({ success: true, appointments });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+export {
+  resgisterUser,
+  LoginUser,
+  getProfile,
+  updateProfile,
+  bookAppointment,
+  listAppointments,
+};
