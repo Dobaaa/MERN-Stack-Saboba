@@ -163,6 +163,31 @@ const listAppointments = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+const cancelAppointments = async (req, res) => {
+  try {
+    const { userId, appointmentId } = req.body;
+    const appointmentData = await appointmentModel.findById(appointmentId);
+    if (appointmentData.userId !== userId) {
+      return res.json({ success: false, message: "unauthorized action" });
+    }
+    await appointmentModel.findByIdAndUpdate(appointmentId, {
+      cancelled: true,
+    });
+
+    const { workerId, slotDate, slotTime } = appointmentData;
+    const workerData = await workerModel.findById(workerId);
+    let slots_booked = workerData.slots_booked;
+    slots_booked[slotDate] = slots_booked[slotDate].filter(
+      (e) => e !== slotTime
+    );
+    await workerModel.findByIdAndUpdate(workerId, { slots_booked });
+    res.json({ success: true, message: "Appointment is Cancelled" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 export {
   resgisterUser,
   LoginUser,
@@ -170,4 +195,5 @@ export {
   updateProfile,
   bookAppointment,
   listAppointments,
+  cancelAppointments,
 };

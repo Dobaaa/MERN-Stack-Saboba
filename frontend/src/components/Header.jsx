@@ -31,7 +31,7 @@ const Header = () => {
         <img
           src={assets.header_img}
           alt=""
-          className="w-full md:absolute bottom-0 h-auto rounded-lg  "
+          className="w-full md:absolute bottom-0 h-auto rounded-lg  max-w-[400px] "
         />
       </div>
     </div>
