@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import workerModel from "../models/workerModel.js";
 import jwt from "jsonwebtoken";
+import appointmentModel from "../models/appointmentModel.js";
+import userModel from "../models/userModel.js";
 // Api for Adding worker
 const addWorker = async (req, res) => {
   try {
@@ -119,4 +121,65 @@ const allWorkers = async (req, res) => {
   }
 };
 
-export { addWorker, loginAdmin, allWorkers };
+// api to get all appointemnts
+
+const appointemtsAdmin = async (req, res) => {
+  try {
+    const appointements = await appointmentModel.find({});
+    res.json({ success: true, appointements });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//cancel appointment admin api
+const cancelAppointmentsAdmin = async (req, res) => {
+  try {
+    const { userId, appointmentId } = req.body;
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    await appointmentModel.findByIdAndUpdate(appointmentId, {
+      cancelled: true,
+    });
+
+    const { workerId, slotDate, slotTime } = appointmentData;
+    const workerData = await workerModel.findById(workerId);
+    let slots_booked = workerData.slots_booked;
+    slots_booked[slotDate] = slots_booked[slotDate].filter(
+      (e) => e !== slotTime
+    );
+    await workerModel.findByIdAndUpdate(workerId, { slots_booked });
+    res.json({ success: true, message: "Appointment is Cancelled" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//api for dashboard
+const adminDashboard = async (req, res) => {
+  try {
+    const workers = await workerModel.find({});
+    const users = await userModel.find({});
+    const appointements = await appointmentModel.find({});
+    const dashData = {
+      workers: workers.length,
+      appointements: appointements.length,
+      clients: users.length,
+      latestAppointments: appointements.reverse().slice(0, 5),
+    };
+    res.json({ success: true, dashData });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+export {
+  addWorker,
+  loginAdmin,
+  allWorkers,
+  appointemtsAdmin,
+  cancelAppointmentsAdmin,
+  adminDashboard,
+};

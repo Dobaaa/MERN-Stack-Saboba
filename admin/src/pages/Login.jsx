@@ -4,12 +4,14 @@ import { useState } from "react";
 import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { WorkerContext } from "../context/WorkerContext";
 const Login = () => {
   const [state, SetState] = useState("Admin");
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
 
   const { SetAToken, BackEndUrl } = useContext(AdminContext);
+  const { SetDToken } = useContext(WorkerContext);
 
   // submit
   const SubmitHandler = async (e) => {
@@ -27,6 +29,16 @@ const Login = () => {
           toast.error(data.message);
         }
       } else {
+        const { data } = await axios.post(BackEndUrl + "/api/worker/login", {
+          email,
+          password,
+        });
+        if (data.success) {
+          localStorage.setItem("dToken", data.token);
+          SetDToken(data.token);
+        } else {
+          toast.error(data.message);
+        }
       }
     } catch (error) {}
   };

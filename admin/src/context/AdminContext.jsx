@@ -9,6 +9,9 @@ const AdminContextProvider = (props) => {
     localStorage.getItem("aToken") ? localStorage.getItem("aToken") : ""
   );
   const [workers, SetWorkers] = useState([]);
+  const [appointments, SetAppointments] = useState([]);
+  const [dashboard, SetDashboard] = useState(false);
+
   const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
   const GetAllWorkers = async () => {
     try {
@@ -41,9 +44,62 @@ const AdminContextProvider = (props) => {
       } else {
         toast.error(data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
+  const getAllAppointments = async () => {
+    try {
+      const { data } = await axios.get(BackEndUrl + "/api/admin/appointments", {
+        headers: { aToken },
+      });
+      if (data.success) {
+        SetAppointments(data.appointements);
+        console.log(data.appointements);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  const cancelAppointment = async (appointmentId) => {
+    try {
+      const { data } = await axios.post(
+        BackEndUrl + "/api/admin/cancel-appointment",
+        { appointmentId },
+        { headers: { aToken } }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+        getAllAppointments();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  const GetDashData = async () => {
+    try {
+      const { data } = await axios.get(BackEndUrl + "/api/admin/dashboard", {
+        headers: { aToken },
+      });
+      if (data.success) {
+        SetDashboard(data.dashData);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   const value = {
     aToken,
     SetAToken,
@@ -51,6 +107,12 @@ const AdminContextProvider = (props) => {
     workers,
     GetAllWorkers,
     changeAvailability,
+    getAllAppointments,
+    appointments,
+    SetAppointments,
+    cancelAppointment,
+    GetDashData,
+    dashboard,
   };
   return (
     <AdminContext.Provider value={value}>
